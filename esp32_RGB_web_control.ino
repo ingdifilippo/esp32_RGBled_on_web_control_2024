@@ -3,7 +3,7 @@
 #include <WebServer.h>
 
 // Replace with your network credentials
-const char* ssid     = "ESP32-Access-Point";
+const char* ssid     = "ESP32_IIS_AOSTA";
 const char* password = "123456789";
 
 // Set web server port number to 80
@@ -33,7 +33,7 @@ void setup() {
   // Set outputs to LOW
   digitalWrite(output16, LOW);
   digitalWrite(output17, LOW);
-  digitalWrite(output17, LOW);
+  digitalWrite(output21, LOW);
 
   // Setting Wi-Fi network with SSID and password
   Serial.print("Setting AP (Access Point)…");
@@ -70,6 +70,7 @@ void loop(){
             client.println();
             
             // turns the GPIOs on and off
+
             if (header.indexOf("GET /16/on") >= 0) {
               Serial.println("GPIO 16 on");
               output16State = "on";
@@ -88,11 +89,11 @@ void loop(){
               digitalWrite(output17, LOW);
             }else if (header.indexOf("GET /21/on") >= 0) {
               Serial.println("GPIO 21 on");
-              output17State = "on";
-              digitalWrite(output17, HIGH);
+              output21State = "on";
+              digitalWrite(output21, HIGH);
             } else if (header.indexOf("GET /21/off") >= 0) {
               Serial.println("GPIO 21 off");
-              output17State = "off";
+              output21State = "off";
               digitalWrite(output21, LOW);
             }
             
